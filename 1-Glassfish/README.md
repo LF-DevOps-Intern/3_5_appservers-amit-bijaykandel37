@@ -47,27 +47,34 @@ Now we can access the app from port 8088.
 
 
 
+==> Sudo apt install maven
+==> wget https://www.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz -P /tmp
+==> sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
+==> sudo ln -s /opt/apache-maven-3.6.3 /opt/maven
 
+Then maven.sh file is created 
+==> Sudo nano /etc/profile.d/maven.sh
 
+And inside this file, this content is appended:
 
-
-
-
-
-wget https://www.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz -P /tmp
-sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
-
-sudo ln -s /opt/apache-maven-3.6.3 /opt/maven
-Sudo nano /etc/profile.d/maven.sh
-
-export JAVA_HOME=/usr/lib/jvm/default-java
+export JAVA_HOME=/usr/lib/jvm/openjdk-11-amd64
 export M2_HOME=/opt/maven
 export MAVEN_HOME=/opt/maven
 export PATH=${M2_HOME}/bin:${PATH}
 
 
-sudo chmod +x /etc/profile.d/maven.sh
-source /etc/profile.d/maven.sh #environment-variables are loaded
+==> sudo chmod +x /etc/profile.d/maven.sh
+==> source /etc/profile.d/maven.sh #environment-variables are loaded
+
+To create war file:
+==> Mvn archetype:generate
 
 
+Then go to dir containing pom.xml file and enter
+==> Mvn validate
+==> Mvn compile
+==> Mvn package
+==> Mvn clean install
+
+This creates a war file which is then selected from admin server page and launched and deployed.
 
